@@ -1,0 +1,25 @@
+{
+  "name": "circleci-angular-centry",
+  "version": "0.1.0",
+  "description": "Test CircleCI deployment for a project with Angular and uploading sourcemaps to sentry.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stefanwalther/circleci-angular-sentry.git"
+  },
+  "keywords": [
+    "sentry.io",
+    "sentry",
+    "angular",
+    "circleci"
+  ],
+  "author": "Stefan Walther",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stefanwalther/circleci-angular-sentry/issues"
+  },
+  "homepage": "https://github.com/stefanwalther/circleci-angular-sentry#readme"
+}
