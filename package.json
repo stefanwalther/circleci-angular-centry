@@ -1,7 +1,7 @@
 {
   "name": "circleci-angular-centry",
   "version": "0.1.0",
-  "description": "Test CircleCI deployment for a project with Angular and uploading sourcemaps to sentry.io",
+  "description": "Test a build for Angular with uploads of sourcemaps to sentry.io",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
