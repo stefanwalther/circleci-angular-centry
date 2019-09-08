@@ -4,7 +4,7 @@ jobs:
     working_directory: ~/tmp
     machine: true
     environment:
-      DOCKER_REPO: qlik/besser-app-ui
+      DOCKER_REPO: stefanwalther/circleci-angular-sentry
     steps:
       - checkout
       - run:
