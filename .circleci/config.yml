@@ -22,6 +22,9 @@ jobs:
       - run:
           name: Build image
           command: make build
+      - run:
+          name: Login to Docker
+          command: docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
       - deploy:
           name: Push image(s) to Docker Hub
           command: |
