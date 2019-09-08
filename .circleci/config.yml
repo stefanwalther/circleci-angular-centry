@@ -1,0 +1,42 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/tmp
+    machine: true
+    environment:
+      DOCKER_REPO: qlik/besser-app-ui
+    steps:
+      - checkout
+      - run:
+          name: Update version
+          command: |
+            set -e
+            VER=$(node -e "console.log(require('./package.json').version.replace(/-[0-9]+/, '-$CIRCLE_BUILD_NUM'))")
+            echo "$VER" > ./version.txt
+            if (echo $VER | egrep -- '-[0-9]+$' 1> /dev/null); then
+              npm version $VER --no-git-tag-version
+            fi
+      - run:
+          name: Preparations
+          command: mkdir -p ./coverage
+      - run:
+          name: Build image
+          command: make build
+      - deploy:
+          name: Push image(s) to Docker Hub
+          command: |
+            PKG_VER=$(cat ./version.txt)
+            BUILD_NR="${CIRCLE_BUILD_NUM}"
+
+            # Always push the build-nr
+            docker tag $DOCKER_REPO $DOCKER_REPO:$PKG_VER.$BUILD_NR
+
+            # Only branch "master" is being pushed to Docker Hub
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              if [ ! -z "$CIRCLE_TAG" ]; then
+                docker tag $DOCKER_REPO $DOCKER_REPO:$CIRCLE_TAG
+              fi
+              docker tag $DOCKER_REPO "${DOCKER_REPO}:${PKG_VER}"
+              docker tag $DOCKER_REPO $DOCKER_REPO:latest
+            fi
+            docker push $DOCKER_REPO
