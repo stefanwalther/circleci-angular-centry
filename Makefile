@@ -22,18 +22,10 @@ gen-readme:					## Generate README.md (using docker-verb)
 	docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb
 .PHONY: gen-readme
 
-setup: install-sentry-cli
-.PHONY: setup
-
 build:							## Build the docker image (prod)
 	NODE_VER=$(NODE_VER)
 	docker build --build-arg NODE_VER=$(NODE_VER) -t $(DOCKER_ORG)/$(DOCKER_REPO) -f Dockerfile.prod .
 .PHONY: build
-
-install-sentry-cli:
-	echo "Installing sentry.io CLI"
-	curl -sL https://sentry.io/get-cli/ | bash
-.PHONY: install-sentry-cli
 
 sentry-release:
 

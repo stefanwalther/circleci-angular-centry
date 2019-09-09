@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+
+  app:
+    image: stefanwalther/circleci-angular-sentry
+    container_name: app
+    ports:
+      - "8080:80"
+    volumes:
+      - app-volume:/usr/share/nginx/html
+
+  sentry-cli:
+    image: getsentry/sentry-cli
+    container_name: sentry-cli
+    depends_on:
+      - app
+    environment:
+      - SENTRY_AUTH_TOKEN=7431f0e9d7ed41a0a619256672a9ac81cfef4295fc9e4e6caca568776aaef3bc
+      - SENTRY_PROJECT_VERSION=v1.0.0
+    volumes:
+      - app-volume/:/work
+      - ./config/sentry-cli/:/work/sentry-cli/
+    command: >
+      sh -c "sh ./sentry-cli/sentry-cli-init.sh"
+
+volumes:
+  app-volume:

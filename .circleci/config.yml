@@ -20,9 +20,6 @@ jobs:
           name: Preparations
           command: mkdir -p ./coverage
       - run:
-          name: Install required tools
-          command: make setup
-      - run:
           name: Build image
           command: make build
       - run:
