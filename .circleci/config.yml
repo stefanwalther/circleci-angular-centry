@@ -20,8 +20,14 @@ jobs:
           name: Preparations
           command: mkdir -p ./coverage
       - run:
+          name: Install required tools
+          command: make setup
+      - run:
           name: Build image
           command: make build
+      - run:
+          name: Sentry release
+          command: make sentry-release
       - run:
           name: Login to Docker
           command: docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"

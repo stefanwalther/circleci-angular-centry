@@ -9,6 +9,8 @@ GOMPLATE_VERSION=v1.9.1
 GOMPLATE_URL=https://github.com/hairyhenderson/gomplate/releases/download
 GOMPLATE_CURRENT_VERSION=v$(shell if [ -e ~/bin/gomplate ]; then ~/bin/gomplate -v | sed -e "s/^gomplate version //"; fi;)
 
+SENTRY_CLI_URL=
+
 help:								## Show this help.
 	@echo ''
 	@echo 'Available commands:'
@@ -20,10 +22,22 @@ gen-readme:					## Generate README.md (using docker-verb)
 	docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb
 .PHONY: gen-readme
 
+setup: install-sentry-cli
+.PHONY: setup
+
 build:							## Build the docker image (prod)
 	NODE_VER=$(NODE_VER)
 	docker build --build-arg NODE_VER=$(NODE_VER) -t $(DOCKER_ORG)/$(DOCKER_REPO) -f Dockerfile.prod .
 .PHONY: build
+
+install-sentry-cli:
+	echo "Installing sentry.io CLI"
+	curl -sL https://sentry.io/get-cli/ | bash
+.PHONY: install-sentry-cli
+
+sentry-release:
+
+.PHONY: sentry-release
 
 circleci:
 	$(MAKE) build
