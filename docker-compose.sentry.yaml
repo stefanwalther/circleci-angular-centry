@@ -13,11 +13,17 @@ services:
   sentry-cli:
     image: getsentry/sentry-cli
     container_name: sentry-cli
+    tty: true
     depends_on:
       - app
     environment:
-      - SENTRY_AUTH_TOKEN=7431f0e9d7ed41a0a619256672a9ac81cfef4295fc9e4e6caca568776aaef3bc
-      - SENTRY_PROJECT_VERSION=v1.0.0
+      - DEBUG=true
+      - SENTRY_AUTH_TOKEN=${SENTRY_AUTH_TOKEN}
+      - SENTRY_PROJECT_VERSION=${SENTRY_PROJECT_VERSION}
+      - SENTRY_ORG=${SENTRY_ORG}
+      - SENTRY_PROJECT=${SENTRY_PROJECT}
+      - SENTRY_LOG_LEVEL=${SENTRY_LOG_LEVEL}
+      - PROJECT_DIR=/work
     volumes:
       - app-volume/:/work
       - ./config/sentry-cli/:/work/sentry-cli/

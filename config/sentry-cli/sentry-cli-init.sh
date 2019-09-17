@@ -1,9 +1,28 @@
 #!/usr/bin/env bash
 
-export SENTRY_ORG=stefanwalther
-export SENTRY_PROJECT=circleci-angular-sentry
-export SENTRY_LOG_LEVEL=debug
+if [ "$DEBUG" = true ]; then
+  echo "======================================================================";
+  echo "Running ./sentry-sli-init.sh";
+  echo "~~";
+  echo "SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN";
+  echo "SENTRY_PROJECT_VERSION: $SENTRY_PROJECT_VERSION";
+  echo "SENTRY_ORG: $SENTRY_ORG";
+  echo "SENTRY_PROJECT: $SENTRY_PROJECT";
+  echo "SENTRY_LOG_LEVEL: $SENTRY_LOG_LEVEL";
+  echo "======================================================================";
+  echo "";
+else
+  echo "Debug is $DEBUG";
+fi
 
-echo "Current version: $SENTRY_PROJECT_VERSION"
+# Temp
+ls -la;
 
+# Create a new release
 sentry-cli releases new "$SENTRY_PROJECT_VERSION"
+sentry-cli releases files "$SENTRY_PROJECT_VERSION" upload-sourcemaps "/" -x .js -x .map --validate --verbose --rewrite --strip-common-prefix
+sentry-cli releases finalize "$SENTRY_PROJECT_VERSION"
+
+
+
+exit $1

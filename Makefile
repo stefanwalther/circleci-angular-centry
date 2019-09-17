@@ -18,17 +18,31 @@ help:								## Show this help.
 	@echo ''
 .PHONY: help
 
-gen-readme:					## Generate README.md (using docker-verb)
+gen-readme:							## Generate README.md (using docker-verb)
 	docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb
 .PHONY: gen-readme
 
-build:							## Build the docker image (prod)
+build:								## Build the docker image (prod)
 	NODE_VER=$(NODE_VER)
 	docker build --build-arg NODE_VER=$(NODE_VER) -t $(DOCKER_ORG)/$(DOCKER_REPO) -f Dockerfile.prod .
 .PHONY: build
 
-sentry-release:
+run:								## Run the container
+	docker run -d $(DOCKER_ORG)/$(DOCKER_REPO)
+.PHONY: run
 
+exec:								## Start the container in exec mode
+	docker exec -it $(DOCKER_ORG)/$(DOCKER_REPO) /bin/sh
+.PHONY: exec
+
+sentry-release:
+	export DEBUG=1; \
+	export SENTRY_AUTH_TOKEN=$(CIRCLECI_ANGULAR_SENTRY_API_TOKEN); \
+	export SENTRY_ORG=stefanwalther; \
+	export SENTRY_PROJECT=circleci-angular-sentry; \
+	export SENTRY_PROJECT_VERSION=$(shell node -e "console.log(require('./package.json').version)"); \
+	export SENTRY_LOG_LEVEL=info; \
+	docker-compose --f=./docker-compose.sentry.yaml up;
 .PHONY: sentry-release
 
 circleci:

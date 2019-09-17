@@ -1,0 +1,4 @@
+{
+  "environment": "development",
+  "sentryDsn": "https://e271a9b45f674775be19b99fe82d0d04@sentry.io/1722437"
+}

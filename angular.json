@@ -24,8 +24,16 @@
             "tsConfig": "tsconfig.app.json",
             "aot": false,
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets/"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/settings",
+                "output": "/settings/"
+              }
             ],
             "styles": [
               "src/styles.scss"
@@ -42,7 +50,12 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
+              // See here: https://medium.com/angular-athens/make-angulars-source-code-available-to-sentry-with-gitlab-ci-b3020bd60ae6
+              "sourceMap": {
+                "hidden": true,
+                "scripts": true,
+                "styles": true
+              },
               "extractCss": true,
               "namedChunks": false,
               "aot": true,
