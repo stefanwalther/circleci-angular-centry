@@ -1,7 +1,7 @@
 {
   "name": "circleci-angular-sentry",
   "description": "Test a build for Angular with uploads of sourcemaps to sentry.io",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
