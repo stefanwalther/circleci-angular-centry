@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {PackageService} from './_services/package.service';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  constructor(
+    public packageServive: PackageService
+  ) {}
+
+
   title = 'hello-world';
 
   doError() {
