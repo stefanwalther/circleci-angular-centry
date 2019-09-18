@@ -27,7 +27,7 @@ export class SentryErrorHandler implements ErrorHandler {
       Sentry.init({
         dsn: this.settingsService.settings.sentryDsn,
         environment: this.settingsService.settings.environment,
-        release: `${pkg.org}/${pkg.name}@${pkg.version}`
+        release: `${pkg.name}@${pkg.version}`
       });
 
 
