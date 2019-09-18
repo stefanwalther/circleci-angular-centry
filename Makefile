@@ -1,6 +1,6 @@
 NODE_VER := $(shell cat .nvmrc)
 
-ifdef version
+ifdef $(CIRCLE_SHA1)
 VERSION := $(CIRCLE_SHA1)
 else
 VERSION := latest
