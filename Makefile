@@ -1,8 +1,6 @@
 NODE_VER := $(shell cat .nvmrc)
 
-ifdef $(CIRCLE_SHA1)
-VERSION := $(CIRCLE_SHA1)
-else
+ifeq ($(CIRCLE_SHA1),)
 VERSION := latest
 endif
 
