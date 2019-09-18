@@ -20,7 +20,7 @@ ls -la;
 
 # Create a new release
 sentry-cli releases new "$SENTRY_PROJECT_VERSION"
-sentry-cli releases files "$SENTRY_PROJECT_VERSION" upload-sourcemaps "/" -x .js -x .map --validate --verbose --rewrite --strip-common-prefix
+sentry-cli releases files "$SENTRY_PROJECT_VERSION" upload-sourcemaps "/" -x .js -x .map --validate --verbose --rewrite --strip-common-prefix --strip-prefix ~/work/
 sentry-cli releases finalize "$SENTRY_PROJECT_VERSION"
 
 VERSION=`sentry-cli releases propose-version`
