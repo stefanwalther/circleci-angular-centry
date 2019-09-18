@@ -23,6 +23,8 @@ services:
       - SENTRY_ORG=${SENTRY_ORG}
       - SENTRY_PROJECT=${SENTRY_PROJECT}
       - SENTRY_LOG_LEVEL=${SENTRY_LOG_LEVEL}
+      - COMMIT_VER=${COMMIT_VER}
+      - GITHUB_PROJECT=${GITHUB_PROJECT}
       - PROJECT_DIR=/work
     volumes:
       - app-volume/:/work
