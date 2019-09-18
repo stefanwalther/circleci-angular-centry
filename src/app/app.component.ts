@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {PackageService} from './_services/package.service';
+import {environment} from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,8 @@ import {PackageService} from './_services/package.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  environment = environment;
 
   constructor(
     public packageServive: PackageService

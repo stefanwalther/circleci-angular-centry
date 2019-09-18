@@ -10,22 +10,18 @@ if [ "$DEBUG" = true ]; then
   echo "SENTRY_PROJECT: $SENTRY_PROJECT";
   echo "SENTRY_LOG_LEVEL: $SENTRY_LOG_LEVEL";
   echo "GITHUB_PROJECT: $GITHUB_PROJECT";
+  echo "COMMIT_VER: $COMMIT_VER";
   echo "======================================================================";
   echo "";
 else
   echo "Debug is $DEBUG";
 fi
 
-# Temp
-ls -la;
-
 # Create a new release
-sentry-cli releases new -p "$GITHUB_PROJECT" "$SENTRY_PROJECT_VERSION"
-sentry-cli releases files "$SENTRY_PROJECT_VERSION" upload-sourcemaps "/" -x .js -x .map --validate --verbose --rewrite --strip-common-prefix --strip-prefix ~/work/
-sentry-cli releases finalize "$SENTRY_PROJECT_VERSION"
-
-VERSION=`sentry-cli releases propose-version`
-sentry-cli releases set-commits "$SENTRY_PROJECT_VERSION" --auto
-
+sentry-cli releases new "$COMMIT_VER"
+sentry-cli releases set-commits --auto "$COMMIT_VER"
+#--strip-prefix ~/work/
+sentry-cli releases files "$COMMIT_VER" upload-sourcemaps "/" -x .js -x .map --validate --verbose --rewrite --strip-common-prefix
+sentry-cli releases finalize "$COMMIT_VER"
 
 exit $1

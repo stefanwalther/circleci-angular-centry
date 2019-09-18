@@ -28,7 +28,7 @@ gen-readme:							## Generate README.md (using docker-verb)
 
 build:								## Build the docker image (prod)
 	NODE_VER=$(NODE_VER)
-	@echo 'VERSION: $(VERSION)'
+	@echo 'COMMIT_VER: $(COMMIT_VER)'
 	sed -ri "s|\"COMMIT_VER\"|\"$COMMIT_VER\"|" src/environments/environment.prod.ts
 	docker build --build-arg NODE_VER=$(NODE_VER) -t $(DOCKER_ORG)/$(DOCKER_REPO) -f Dockerfile.prod .
 .PHONY: build
@@ -49,6 +49,7 @@ sentry-release:
 	export GITHUB_PROJECT=stefanwalther/circleci-angular-sentry; \
 	export SENTRY_PROJECT_VERSION=$(shell node -e "console.log(require('./package.json').name)")@$(shell node -e "console.log(require('./package.json').version)"); \
 	export SENTRY_LOG_LEVEL=info; \
+	export COMMIT_VER=$(COMMIT_VER); \
 	docker-compose --f=./docker-compose.sentry.yaml run sentry-cli;
 .PHONY: sentry-release
 
