@@ -6,6 +6,7 @@ import * as Sentry from '@sentry/browser';
 import * as _ from 'lodash';
 import {PackageService} from '../_services/package.service';
 import {SettingsService} from '../_services/settings.service';
+import {environment} from 'src/environments/environment';
 
 
 @Injectable()
@@ -27,7 +28,7 @@ export class SentryErrorHandler implements ErrorHandler {
       Sentry.init({
         dsn: this.settingsService.settings.sentryDsn,
         environment: this.settingsService.settings.environment,
-        release: `${pkg.name}@${pkg.version}`
+        release: `${environment.version}`
       });
 
 

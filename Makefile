@@ -1,5 +1,11 @@
 NODE_VER := $(shell cat .nvmrc)
 
+ifdef version
+VERSION := $(CIRCLE_SHA1)
+else
+VERSION := latest
+endif
+
 DOCKER_ORG=stefanwalther
 DOCKER_REPO=circleci-angular-sentry
 
@@ -8,8 +14,6 @@ GOARCH=$(shell go env GOARCH)
 GOMPLATE_VERSION=v1.9.1
 GOMPLATE_URL=https://github.com/hairyhenderson/gomplate/releases/download
 GOMPLATE_CURRENT_VERSION=v$(shell if [ -e ~/bin/gomplate ]; then ~/bin/gomplate -v | sed -e "s/^gomplate version //"; fi;)
-
-SENTRY_CLI_URL=
 
 help:								## Show this help.
 	@echo ''
@@ -24,6 +28,7 @@ gen-readme:							## Generate README.md (using docker-verb)
 
 build:								## Build the docker image (prod)
 	NODE_VER=$(NODE_VER)
+	@echo "VERSION: $(VERSION)"
 	docker build --build-arg NODE_VER=$(NODE_VER) -t $(DOCKER_ORG)/$(DOCKER_REPO) -f Dockerfile.prod .
 .PHONY: build
 
