@@ -2,7 +2,7 @@
   "org": "stefanwalther",
   "name": "circleci-angular-sentry",
   "description": "Test a build for Angular with uploads of sourcemaps to sentry.io",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
