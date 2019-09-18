@@ -9,6 +9,7 @@ if [ "$DEBUG" = true ]; then
   echo "SENTRY_ORG: $SENTRY_ORG";
   echo "SENTRY_PROJECT: $SENTRY_PROJECT";
   echo "SENTRY_LOG_LEVEL: $SENTRY_LOG_LEVEL";
+  echo "GITHUB_PROJECT: $GITHUB_PROJECT";
   echo "======================================================================";
   echo "";
 else
@@ -19,7 +20,7 @@ fi
 ls -la;
 
 # Create a new release
-sentry-cli releases new "$SENTRY_PROJECT_VERSION"
+sentry-cli releases new -p "$GITHUB_PROJECT" "$SENTRY_PROJECT_VERSION"
 sentry-cli releases files "$SENTRY_PROJECT_VERSION" upload-sourcemaps "/" -x .js -x .map --validate --verbose --rewrite --strip-common-prefix --strip-prefix ~/work/
 sentry-cli releases finalize "$SENTRY_PROJECT_VERSION"
 
