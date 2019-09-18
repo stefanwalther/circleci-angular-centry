@@ -2,6 +2,8 @@ NODE_VER := $(shell cat .nvmrc)
 
 ifeq ($(CIRCLE_SHA1),)
 VERSION := latest
+else
+VERSION := $(CIRCLE_SHA1)
 endif
 
 DOCKER_ORG=stefanwalther
@@ -26,7 +28,7 @@ gen-readme:							## Generate README.md (using docker-verb)
 
 build:								## Build the docker image (prod)
 	NODE_VER=$(NODE_VER)
-	@echo 'VERSION: $$VERSION'
+	@echo 'VERSION: $(VERSION)'
 	docker build --build-arg NODE_VER=$(NODE_VER) -t $(DOCKER_ORG)/$(DOCKER_REPO) -f Dockerfile.prod .
 .PHONY: build
 
