@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  version: 'VERSION'
+  COMMIT_VER: 'VERSION'
 };
 
 /*
