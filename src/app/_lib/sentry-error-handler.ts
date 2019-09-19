@@ -18,8 +18,11 @@ export class SentryErrorHandler implements ErrorHandler {
   }
 
   handleError(error) {
+    console.group('Error Handling');
     console.log('OK; handle the error');
     console.log('settings', this.settingsService.settings);
+    console.log('environment', environment);
+    console.groupEnd();
 
     if (this.settingsService.settings.sentryDsn) {
 
@@ -28,7 +31,7 @@ export class SentryErrorHandler implements ErrorHandler {
       Sentry.init({
         dsn: this.settingsService.settings.sentryDsn,
         environment: this.settingsService.settings.environment,
-        release: `${environment.COMMIT_VER}`
+        release: `${environment.version}`
       });
 
 

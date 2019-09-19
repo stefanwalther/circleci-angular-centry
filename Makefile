@@ -3,9 +3,9 @@ NODE_VER := $(shell cat .nvmrc)
 OS_NAME := $(shell uname -s | tr A-Z a-z)
 
 ifeq ($(CIRCLE_SHA1),)
-COMMIT_VER := unknown
+RELEASE_VERSION := $(shell git describe --always --long)
 else
-COMMIT_VER := $(CIRCLE_SHA1)
+RELEASE_VERSION := $(CIRCLE_SHA1)
 endif
 
 DOCKER_ORG=stefanwalther
@@ -30,20 +30,23 @@ gen-readme:							## Generate README.md (using docker-verb)
 
 build:								## Build the docker image (prod)
 	NODE_VER=$(NODE_VER)
-	@echo 'COMMIT_VER: $(COMMIT_VER)'
+	@echo 'RELEASE_VERSION: $(RELEASE_VERSION)'
 	@echo 'OS: $(OS_NAME)'
 	@echo '---'
 
-	docker build --build-arg NODE_VER=$(NODE_VER) --build-arg COMMIT_VER=$(COMMIT_VER) -t $(DOCKER_ORG)/$(DOCKER_REPO) -f Dockerfile.prod .
+	docker build --build-arg NODE_VER=$(NODE_VER) --build-arg RELEASE_VERSION=$(RELEASE_VERSION) -t $(DOCKER_ORG)/$(DOCKER_REPO) -f Dockerfile.prod .
 .PHONY: build
 
 run:								## Run the container
-	docker run -d $(DOCKER_ORG)/$(DOCKER_REPO)
+	docker run -p 8080:80 -d $(DOCKER_ORG)/$(DOCKER_REPO)
 .PHONY: run
 
 exec:								## Start the container in exec mode
 	docker exec -it $(DOCKER_ORG)/$(DOCKER_REPO) /bin/sh
 .PHONY: exec
+
+build-release: build sentry-release
+.PHONY: build-release
 
 sentry-release:
 	export DEBUG=1; \
@@ -52,9 +55,9 @@ sentry-release:
 	export SENTRY_PROJECT=circleci-angular-sentry; \
 	export GITHUB_PROJECT=stefanwalther/circleci-angular-sentry; \
 	export SENTRY_PROJECT_VERSION=$(shell node -e "console.log(require('./package.json').name)")@$(shell node -e "console.log(require('./package.json').version)"); \
-	export SENTRY_LOG_LEVEL=info; \
-	export COMMIT_VER=$(COMMIT_VER); \
-	docker-compose --f=./docker-compose.sentry.yaml run sentry-cli;
+	export SENTRY_LOG_LEVEL=debug; \
+	export RELEASE_VERSION=$(SENTRY_RROJECT)@$(RELEASE_VERSION); \
+	docker-compose --f=./docker-compose.sentry.yaml run sentry-cli && docker-compose --f=./docker-compose.sentry.yaml down -t 0;
 .PHONY: sentry-release
 
 circleci:

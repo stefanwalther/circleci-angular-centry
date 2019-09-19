@@ -1,7 +1,10 @@
 ## Taken from: https://dev.to/avatsaev/create-efficient-angular-docker-images-with-multi-stage-builds-1f3n
 
+# Todo: Not used, so can be removed to simplify and speed up
 ARG NODE_VER
-ARG COMMIT_VER
+
+# Todo: Is this really needed ?
+ARG RELEASE_VERSION
 
 ### STAGE 1: Build ###
 
