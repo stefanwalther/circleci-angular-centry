@@ -56,7 +56,7 @@ sentry-release:
 	export GITHUB_PROJECT=stefanwalther/circleci-angular-sentry; \
 	export SENTRY_PROJECT_VERSION=$(shell node -e "console.log(require('./package.json').name)")@$(shell node -e "console.log(require('./package.json').version)"); \
 	export SENTRY_LOG_LEVEL=debug; \
-	export RELEASE_VERSION=$(SENTRY_RROJECT)@$(RELEASE_VERSION); \
+	export RELEASE_VERSION=$(RELEASE_VERSION); \
 	docker-compose --f=./docker-compose.sentry.yaml run sentry-cli && docker-compose --f=./docker-compose.sentry.yaml down -t 0;
 .PHONY: sentry-release
 
