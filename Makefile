@@ -34,7 +34,7 @@ build:								## Build the docker image (prod)
 	@echo 'OS: $(OS_NAME)'
 	@echo '---'
 
-	docker build --build-arg NODE_VER=$(NODE_VER) --build-arg RELEASE_VERSION=$(RELEASE_VERSION) -t $(DOCKER_ORG)/$(DOCKER_REPO) -f Dockerfile.prod .
+	docker build --build-arg release_version=$(RELEASE_VERSION) -t $(DOCKER_ORG)/$(DOCKER_REPO) -f Dockerfile.prod .
 .PHONY: build
 
 run:								## Run the container
