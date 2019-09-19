@@ -21,7 +21,7 @@ fi
 sentry-cli releases new "$COMMIT_VER"
 sentry-cli releases set-commits --auto "$COMMIT_VER"
 #--strip-prefix ~/work/
-sentry-cli releases files "$COMMIT_VER" upload-sourcemaps "/" -x .js -x .map --validate --verbose --rewrite --strip-common-prefix --strip-prefix ~/work/
+sentry-cli releases files "$COMMIT_VER" upload-sourcemaps "/work" -x .js -x .map --validate --verbose --rewrite --strip-common-prefix
 sentry-cli releases finalize "$COMMIT_VER"
 
 exit $1

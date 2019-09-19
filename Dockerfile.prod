@@ -1,5 +1,8 @@
 ## Taken from: https://dev.to/avatsaev/create-efficient-angular-docker-images-with-multi-stage-builds-1f3n
 
+ARG NODE_VER
+ARG COMMIT_VER
+
 ### STAGE 1: Build ###
 
 # We label our stage as ‘builder’
@@ -16,8 +19,7 @@ WORKDIR /ng-app
 COPY . .
 
 ## Build the angular app in production mode and store the artifacts in dist folder
-RUN npm run ng build -- --prod --output-path=dist --source-map
-
+RUN npm run build:prod
 
 ### STAGE 2: Setup ###
 

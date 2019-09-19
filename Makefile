@@ -33,15 +33,8 @@ build:								## Build the docker image (prod)
 	@echo 'COMMIT_VER: $(COMMIT_VER)'
 	@echo 'OS: $(OS_NAME)'
 	@echo '---'
-#	$(info checking something)
 
-#	ifeq ($(OS_NAME), darwin)
-#		$(info We are working on a Mac)
-#	else
-		$(shell sed -ri "s|\"COMMIT_VER\"|\"$COMMIT_VER\"|" src/environments/environment.prod.ts)
-#	endif
-
-	docker build --build-arg NODE_VER=$(NODE_VER) -t $(DOCKER_ORG)/$(DOCKER_REPO) -f Dockerfile.prod .
+	docker build --build-arg NODE_VER=$(NODE_VER) --build-arg COMMIT_VER=$(COMMIT_VER) -t $(DOCKER_ORG)/$(DOCKER_REPO) -f Dockerfile.prod .
 .PHONY: build
 
 run:								## Run the container
@@ -67,8 +60,6 @@ sentry-release:
 circleci:
 	$(MAKE) build
 .PHONY: circleci
-
-
 
 os:
 	@echo $(OS_NAME)

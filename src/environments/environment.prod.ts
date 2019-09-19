@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  COMMIT_VER: 'unknown'
+  COMMIT_VER: '%COMMIT_VER%'
 };
