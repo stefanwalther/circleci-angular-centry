@@ -1,5 +1,7 @@
 NODE_VER := $(shell cat .nvmrc)
 
+OS_NAME := $(shell uname -s | tr A-Z a-z)
+
 ifeq ($(CIRCLE_SHA1),)
 COMMIT_VER := unknown
 else
@@ -29,7 +31,16 @@ gen-readme:							## Generate README.md (using docker-verb)
 build:								## Build the docker image (prod)
 	NODE_VER=$(NODE_VER)
 	@echo 'COMMIT_VER: $(COMMIT_VER)'
-	sed -ri "s|\"COMMIT_VER\"|\"$COMMIT_VER\"|" src/environments/environment.prod.ts
+	@echo 'OS: $(OS_NAME)'
+	@echo '---'
+#	$(info checking something)
+
+#	ifeq ($(OS_NAME), darwin)
+#		$(info We are working on a Mac)
+#	else
+		$(shell sed -ri "s|\"COMMIT_VER\"|\"$COMMIT_VER\"|" src/environments/environment.prod.ts)
+#	endif
+
 	docker build --build-arg NODE_VER=$(NODE_VER) -t $(DOCKER_ORG)/$(DOCKER_REPO) -f Dockerfile.prod .
 .PHONY: build
 
@@ -56,3 +67,9 @@ sentry-release:
 circleci:
 	$(MAKE) build
 .PHONY: circleci
+
+
+
+os:
+	@echo $(OS_NAME)
+.PHONY: os
