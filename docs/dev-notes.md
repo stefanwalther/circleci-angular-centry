@@ -7,3 +7,4 @@ Make `sed` work on MacOS:
 
 - https://forum.sentry.io/t/help-getting-angular-private-source-maps-working/7186
 - https://github.com/juankaram/sentry-release/blob/master/entrypoint.sh
+- Could not find repository form '.': https://github.com/getsentry/sentry-cli/issues/555
