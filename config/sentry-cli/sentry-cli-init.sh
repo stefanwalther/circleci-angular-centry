@@ -25,10 +25,11 @@ fi
 # RELEASE_VERSION=${SENTRY_PROJECT_VERSION}
 
 sentry-cli info
+sentry-cli repos list
 
 # Create a new release
 sentry-cli releases new "$RELEASE_VERSION"
-sentry-cli releases set-commits ${GITHUB_PROJECT} ${RELEASE_VERSION}
+sentry-cli releases set-commits ${RELEASE_VERSION} --commit stefanwalther/circleci-angular-sentry
 #--strip-prefix ~/work/
 sentry-cli releases files "$RELEASE_VERSION" upload-sourcemaps "/work" -x .js -x .map --validate --verbose --rewrite --strip-common-prefix
 sentry-cli releases finalize "$RELEASE_VERSION"
