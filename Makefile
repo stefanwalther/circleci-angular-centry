@@ -41,6 +41,10 @@ run:								## Run the container
 	docker run -p 8080:80 -d $(DOCKER_ORG)/$(DOCKER_REPO)
 .PHONY: run
 
+clean:
+	docker ps -a -q  --filter ancestor=stefanwalther/circleci-angular-sentry
+.PHONY:clean
+
 exec:								## Start the container in exec mode
 	docker exec -it $(DOCKER_ORG)/$(DOCKER_REPO) /bin/sh
 .PHONY: exec

@@ -28,7 +28,7 @@ sentry-cli info
 
 # Create a new release
 sentry-cli releases new "$RELEASE_VERSION"
-#sentry-cli releases set-commits  --auto "$RELEASE_VERSION"
+sentry-cli releases set-commits  --auto "$RELEASE_VERSION"
 #--strip-prefix ~/work/
 sentry-cli releases files "$RELEASE_VERSION" upload-sourcemaps "/work" -x .js -x .map --validate --verbose --rewrite --strip-common-prefix
 sentry-cli releases finalize "$RELEASE_VERSION"
