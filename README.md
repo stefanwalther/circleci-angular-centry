@@ -208,7 +208,7 @@ export const environment = {
 </details>
 
 <details>
-<summary>Changes in `package.json`</summary>
+<summary>Changes in <pre>package.json</pre></summary>
 
 **Adapt scripts in [package.json](./package.json)**
 
