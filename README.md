@@ -6,7 +6,7 @@
 
 ## Purpose
 
-... install instructions here ...
+This is a sample repository how to build a docker image for a Angular project and after successful build create a new release for sentry.io plus upload the necessary sourcemap files.
 
 ## Implementation Instructions
 
