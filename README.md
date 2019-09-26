@@ -84,6 +84,13 @@ sentry-release:						## Do the sentry release
 <details>
 <summary>Changes in ./Dockerfile.prod</summary>
 
+Handle the build-argument after the first `FROM` statement in `Dockerfile.prod`:
+
+```bash
+ARG release_version=not_set
+ENV RELEASE_VERSION=$release_version
+```
+
 Use the `build:prod` instead of the `build` task
 
 ```bash
