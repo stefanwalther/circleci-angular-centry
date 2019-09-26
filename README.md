@@ -12,10 +12,12 @@
 
 <details>
 <summary>Install necessary dependencies</summary>
+
 ```js
 npm install cross-env --save-dev
 npm install replace --save-dev
 ```
+
 </details>
 
 **Add sentry-release task in `./.circleci/config.yml`**
