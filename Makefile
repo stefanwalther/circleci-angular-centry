@@ -11,12 +11,6 @@ endif
 DOCKER_ORG=stefanwalther
 DOCKER_REPO=circleci-angular-sentry
 
-GOOS=$(shell go env GOOS)
-GOARCH=$(shell go env GOARCH)
-GOMPLATE_VERSION=v1.9.1
-GOMPLATE_URL=https://github.com/hairyhenderson/gomplate/releases/download
-GOMPLATE_CURRENT_VERSION=v$(shell if [ -e ~/bin/gomplate ]; then ~/bin/gomplate -v | sed -e "s/^gomplate version //"; fi;)
-
 help:								## Show this help.
 	@echo ''
 	@echo 'Available commands:'
