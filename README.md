@@ -223,9 +223,9 @@ export const environment = {
     "prebuild": "replace '%RELEASE_VERSION%' $RELEASE_VERSION src/environments/environment.prod.ts",
     "postbuild": "replace $RELEASE_VERSION '%RELEASE_VERSION%' src/environments/environment.prod.ts",
     "build:prod": "cross-env RELEASE_VERSION=${RELEASE_VERSION:=unknown} ng build --prod --output-path=dist --source-map",
-    "prebuild:prod": "cross-env RELEASE_VERSION=${RELEASE_VERSION:=unknown} echo \"Replacing %RELEASE_VERSION% with '$RELEASE_VERSION'\" && replace '%RELEASE_VERSION%' $RELEASE_VERSION src/environments/environment.prod.ts",
-    "postbuild:prod": "cross-env RELEASE_VERSION=${RELEASE_VERSION:=unknown} echo \"Resetting RELEASE_VERSION\" && replace $RELEASE_VERSION '%RELEASE_VERSION%' src/environments/environment.prod.ts",
-
+    "prebuild:prod": "cross-env RELEASE_VERSION=${RELEASE_VERSION:=unknown} echo \"src/environments/environment.prod.ts: Replacing %RELEASE_VERSION% with '$RELEASE_VERSION'\" && replace '%RELEASE_VERSION%' $RELEASE_VERSION src/environments/environment.prod.ts",
+    "postbuild:prod": "cross-env RELEASE_VERSION=${RELEASE_VERSION:=unknown} echo \"src/environments/environment.prod.ts: Resetting RELEASE_VERSION\" && replace $RELEASE_VERSION '%RELEASE_VERSION%' src/environments/environment.prod.ts",
+  
 ```
 
 </details>
