@@ -41,7 +41,7 @@ run:								## Run the container
 	docker run -p 8080:80 -d $(DOCKER_ORG)/$(DOCKER_REPO)
 .PHONY: run
 
-clean:
+clean:								## Delete all local containers belonging to this project
 	docker ps -a -q  --filter ancestor=stefanwalther/circleci-angular-sentry
 .PHONY:clean
 
@@ -49,10 +49,10 @@ exec:								## Start the container in exec mode
 	docker exec -it $(DOCKER_ORG)/$(DOCKER_REPO) /bin/sh
 .PHONY: exec
 
-build-release: build sentry-release
+build-release: build sentry-release ## Build & Release
 .PHONY: build-release
 
-sentry-release:
+sentry-release:						## Do the sentry release
 	export DEBUG=1; \
 	export SENTRY_AUTH_TOKEN=$(CIRCLECI_ANGULAR_SENTRY_API_TOKEN); \
 	export SENTRY_ORG=stefanwalther; \
