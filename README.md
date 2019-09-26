@@ -21,7 +21,7 @@ npm install replace --save-dev
 </details>
 
 <details>
-<summary>Changes in `./.circleci/config.yml`</summary>
+<summary>Changes in ./.circleci/config.yml</summary>
 
 **Add sentry-release task in `./.circleci/config.yml`**
 
@@ -34,7 +34,7 @@ npm install replace --save-dev
 </details>
 
 <details>
-<summary>Changes in `makefile`</summary>
+<summary>Changes in makefile</summary>
 
 **Ensure the following header:**
 
@@ -82,7 +82,7 @@ sentry-release:						## Do the sentry release
 </details>
 
 <details>
-<summary>Changes in `dockerfile.prod`</summary>
+<summary>Changes in ./Dockerfile.prod</summary>
 
 Use the `build:prod` instead of the `build` task
 
@@ -99,7 +99,7 @@ Add the environment variable `CIRCLECI_ANGULAR_SENTRY_API_TOKEN` to CircleCI.
 </details>
 
 <details>
-<summary>Create the `docker-compose.sentry.yml` file</summary>
+<summary>Create the docker-compose.sentry.yml file</summary>
 
 ```yaml
 version: '2'
@@ -144,16 +144,16 @@ volumes:
 </details>
 
 <details>
-<summary>Add the `./config/sentry-cli/sentry-cli-init.sh` file</summary>
+<summary>Add the ./config/sentry-cli/sentry-cli-init.sh file</summary>
 
 See [here](./config/sentry-cli/sentry-cli-init.sh)
 
 </details>
 
 <details>
-<summary>Changes in `angular.json`</summary>
+<summary>Changes in angular.json</summary>
 
-**Check that in angular.json the following section looks as follows**
+**Check that in `angular.json` the following section looks as follows**
 
 ```json
 
@@ -185,7 +185,7 @@ See [here](./config/sentry-cli/sentry-cli-init.sh)
 </details>
 
 <details>
-<summary>environment settings</summary>
+<summary>Angular: Environment settings</summary>
 
 **environment.ts settings**
 
@@ -208,7 +208,7 @@ export const environment = {
 </details>
 
 <details>
-<summary>Changes in <pre>package.json</pre></summary>
+<summary>Changes in package.json</summary>
 
 **Adapt scripts in [package.json](./package.json)**
 
